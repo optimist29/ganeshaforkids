@@ -1,0 +1,47 @@
+---
+import GaneshaCard from './GaneshaCard.astro';
+import { ganeshaForms } from '../data/ganeshaForms.js';
+
+// Show first 8 forms on homepage
+const displayForms = ganeshaForms.slice(0, 8);
+---
+
+<section id="ganesha-forms" class="py-16 bg-gradient-to-b from-warm-bg to-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="font-heading font-bold text-4xl sm:text-5xl text-gray-800 mb-4">
+        32 Sacred Forms of Ganesha
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Discover the divine manifestations of Ganesha, each with unique significance and beautiful stories. 
+        Each form teaches us valuable lessons through ancient wisdom and mantras.
+      </p>
+    </div>
+    
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {displayForms.map((form) => (
+        <GaneshaCard
+          name={form.name}
+          description={form.description}
+          image={form.image}
+          slug={form.slug}
+          significance={form.significance}
+          color={form.color}
+        />
+      ))}
+    </div>
+    
+    <!-- See All Button -->
+    <div class="text-center mt-12">
+      <a href="/forms" 
+         class="inline-flex items-center space-x-2 bg-gradient-to-r from-ganesha-orange to-ganesha-red text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+        <span>Explore All 32 Forms</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

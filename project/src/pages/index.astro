@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import GaneshaGrid from '../components/GaneshaGrid.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Ganesha for Kids - Beautiful Forms & Stories of Ganesha"
+  description="Discover the wonderful world of Ganesha through engaging stories and beautiful illustrations perfect for children. Learn about different forms of Ganesha with easy-to-understand tales."
+  keywords="Ganesha stories for kids, Ganesha forms, Hindu mythology children, Ganesha avatars, Indian culture kids, Vinayaka stories, Ganapati tales"
+>
+  <Header />
+  <Hero />
+  <GaneshaGrid />
+  
+  <!-- Features Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-heading font-bold text-3xl sm:text-4xl text-gray-800 mb-4">
+          Why Learn About Ganesha?
+        </h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Every story of Ganesha teaches valuable life lessons perfect for young minds
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-gradient-to-br from-ganesha-orange to-ganesha-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">🧠</span>
+          </div>
+          <h3 class="font-heading font-semibold text-xl mb-3">Wisdom & Learning</h3>
+          <p class="text-gray-600">Ganesha is the patron of arts and sciences, inspiring children to love learning and knowledge.</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-gradient-to-br from-ganesha-pink to-ganesha-purple rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">💪</span>
+          </div>
+          <h3 class="font-heading font-semibold text-xl mb-3">Overcoming Challenges</h3>
+          <p class="text-gray-600">As the remover of obstacles, Ganesha teaches children to face difficulties with courage and wisdom.</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-gradient-to-br from-ganesha-red to-ganesha-orange rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">❤️</span>
+          </div>
+          <h3 class="font-heading font-semibold text-xl mb-3">Kindness & Compassion</h3>
+          <p class="text-gray-600">Ganesha's stories teach the importance of being kind, helpful, and caring towards others.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</Layout>

@@ -1,0 +1,192 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { ganeshaForms } from '../../data/ganeshaForms.js';
+
+export async function getStaticPaths() {
+  return ganeshaForms.map(form => ({
+    params: { slug: form.slug },
+    props: { form }
+  }));
+}
+
+const { form } = Astro.props;
+---
+
+<Layout 
+  title={`${form.name} - ${form.title} | 32 Forms of Ganesha | Kathaswithpooja`}
+  description={`Learn about ${form.name}: ${form.meaning} Discover the sacred mantra, spiritual significance, and beautiful story of this divine form of Ganesha.`}
+  keywords={`${form.name}, ${form.title}, Ganesha forms, Ganesha mantras, ${form.significance}, Kathaswithpooja, Hindu mythology`}
+>
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class={`bg-gradient-to-br from-${form.color} via-${form.color}/80 to-${form.color}/60 py-16`}>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading font-bold text-4xl sm:text-5xl text-white mb-4">
+        {form.name}
+      </h1>
+      <p class="text-xl sm:text-2xl text-white/90 mb-6">
+        {form.title}
+      </p>
+      <p class="text-lg text-white/80 max-w-2xl mx-auto">
+        Form #{form.id} of the 32 Sacred Manifestations
+      </p>
+    </div>
+  </section>
+  
+  <!-- Main Content -->
+  <article class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Image -->
+      <div class="mb-12">
+        <img 
+          src={form.image} 
+          alt={`${form.name} - ${form.title}`}
+          class="w-full h-96 object-cover rounded-2xl shadow-lg"
+        />
+      </div>
+      
+      <!-- Sacred Mantra -->
+      <div class="mb-12 bg-gradient-to-r from-orange-50 to-yellow-50 p-8 rounded-2xl border-l-4 border-ganesha-orange">
+        <h2 class="font-heading text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <span class="text-2xl mr-3">🕉️</span>
+          Sacred Mantra
+        </h2>
+        <div class="bg-white p-6 rounded-xl shadow-sm">
+          <p class="text-lg font-sanskrit text-ganesha-orange leading-relaxed mb-4 text-center">
+            {form.mantra}
+          </p>
+        </div>
+      </div>
+      
+      <!-- Meaning -->
+      <div class="mb-12 bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-2xl border-l-4 border-blue-500">
+        <h2 class="font-heading text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <span class="text-2xl mr-3">📿</span>
+          Divine Meaning
+        </h2>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          {form.meaning}
+        </p>
+      </div>
+      
+      <!-- Story Section -->
+      <div class="prose prose-lg max-w-none mb-12">
+        <h2 class="font-heading text-3xl font-bold text-gray-800 mb-6 flex items-center">
+          <span class="text-3xl mr-3">📖</span>
+          The Story of {form.name}
+        </h2>
+        
+        <div class="text-gray-700 leading-relaxed space-y-4">
+          {form.story && form.story.split('\n\n').map((paragraph) => (
+            <p class="text-lg">{paragraph.trim()}</p>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Video Section -->
+      {form.videoId && (
+        <div class="mb-12">
+          <h2 class="font-heading text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <span class="text-2xl mr-3">🎥</span>
+            Watch the Story
+          </h2>
+          <div class="aspect-video rounded-2xl overflow-hidden shadow-lg">
+            <iframe 
+              src={`https://www.youtube.com/embed/${form.videoId}`}
+              title={`${form.name} Story Video`}
+              class="w-full h-full"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      )}
+      
+      <!-- Significance & Lesson -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class={`bg-${form.color}/10 p-6 rounded-xl border border-${form.color}/20`}>
+          <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 flex items-center">
+            <span class="text-xl mr-2">🌟</span>
+            Divine Significance
+          </h3>
+          <p class="text-gray-700">
+            {form.significance}
+          </p>
+        </div>
+        
+        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+          <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 flex items-center">
+            <span class="text-xl mr-2">📚</span>
+            Life Lesson
+          </h3>
+          <p class="text-gray-700">
+            {form.lesson}
+          </p>
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <div class="flex justify-between items-center pt-8 border-t border-gray-200">
+        <a href="/forms" 
+           class="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span>All 32 Forms</span>
+        </a>
+        
+        <div class="flex items-center space-x-4">
+          {form.id > 1 && (
+            <a href={`/forms/${ganeshaForms[form.id - 2].slug}`}
+               class="text-gray-600 hover:text-gray-800 transition-colors">
+              Previous
+            </a>
+          )}
+          {form.id < 32 && (
+            <a href={`/forms/${ganeshaForms[form.id].slug}`}
+               class={`inline-flex items-center space-x-2 bg-${form.color} text-white px-6 py-3 rounded-full hover:bg-${form.color}/90 transition-colors`}>
+              <span>Next Form</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <Footer />
+</Layout>
+
+<script type="application/ld+json" define:vars={{ form }}>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `${form.name} - ${form.title}`,
+  "description": form.meaning,
+  "author": {
+    "@type": "Organization",
+    "name": "Kathaswithpooja"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kathaswithpooja",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ganeshaforkids.com/logo.png"
+    }
+  },
+  "image": form.image,
+  "datePublished": "2025-01-01",
+  "dateModified": "2025-01-01",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://ganeshaforkids.com/forms/${form.slug}`
+  }
+}
+</script>
